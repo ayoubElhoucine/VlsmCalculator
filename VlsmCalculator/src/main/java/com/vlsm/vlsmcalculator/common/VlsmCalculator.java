@@ -63,7 +63,7 @@ public class VlsmCalculator {
         return convertQuartetToBinaryString(majorNetwork);
     }
 
-    public static int calcMask(int neededSize) {
+    private static int calcMask(int neededSize) {
 
         if (neededSize % 2 != 0)
             neededSize += 1 ;
