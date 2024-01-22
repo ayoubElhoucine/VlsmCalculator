@@ -10,11 +10,11 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-public class InetAddresses {
+class InetAddresses {
     private static final int IPV4_PART_COUNT = 4;
     private static final int IPV6_PART_COUNT = 8;
 
-    public static boolean isMappedIPv4Address(String ipString) {
+    static boolean isMappedIPv4Address(String ipString) {
         byte[] bytes = ipStringToBytes(ipString);
         if (bytes == null || bytes.length != 16) {
             return false;
@@ -33,7 +33,7 @@ public class InetAddresses {
         return true;
     }
 
-    public static byte[] ipStringToBytes(String ipString) {
+    static byte[] ipStringToBytes(String ipString) {
         boolean hasColon = false;
         boolean hasDot = false;
         for (int i = 0; i < ipString.length(); i++) {
@@ -64,7 +64,7 @@ public class InetAddresses {
         }
     }
 
-    private static byte[] textToNumericFormatV4(String ipString) {
+    static byte[] textToNumericFormatV4(String ipString) {
         String[] address = ipString.split("\\.", 5);
         if (address.length != 4) {
             return null;
@@ -82,7 +82,7 @@ public class InetAddresses {
         return bytes;
     }
 
-    private static byte[] textToNumericFormatV6(String ipString) {
+    static byte[] textToNumericFormatV6(String ipString) {
         String[] parts = ipString.split(":", 10);
         if (parts.length < 3 || parts.length > 9) {
             return null;
@@ -172,7 +172,7 @@ public class InetAddresses {
         throw new NumberFormatException();
     }
 
-    public static String toAddrString(InetAddress ip) {
+    static String toAddrString(InetAddress ip) {
         if (ip == null) {
             return null;
         }
@@ -191,11 +191,11 @@ public class InetAddresses {
         return hextetsToIPv6String(hextets);
     }
 
-    public static int fromBytes(byte b1, byte b2, byte b3, byte b4) {
+    static int fromBytes(byte b1, byte b2, byte b3, byte b4) {
         return (((b1 << 24) | ((b2 & 255) << 16)) | ((b3 & 255) << 8)) | (b4 & 255);
     }
 
-    private static void compressLongestRunOfZeroes(int[] hextets) {
+    static void compressLongestRunOfZeroes(int[] hextets) {
         int bestRunStart = -1;
         int bestRunLength = -1;
         int runStart = -1;

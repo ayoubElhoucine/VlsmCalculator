@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class VlsmCalculator {
+class VlsmCalculator {
 
-    public static List<Subnet> calculateVLSM(String majorNetwork, Map<String, Integer> subnets) {
+    static List<Subnet> calculateVLSM(String majorNetwork, Map<String, Integer> subnets) {
         Map<String, Integer> sortedSubnets = sortMap(subnets);
         List<Subnet> output = new ArrayList<>();
         int currentIp = findFirstIp(majorNetwork);
@@ -59,7 +59,7 @@ public class VlsmCalculator {
         return ((ipAddress >> 24) & 255) + "." + ((ipAddress >> 16) & 255) + "." + ((ipAddress >> 8) & 255) + "." + (ipAddress & 255);
     }
 
-    public static int findFirstIp(String majorNetwork) {
+    static int findFirstIp(String majorNetwork) {
         return convertQuartetToBinaryString(majorNetwork);
     }
 
@@ -77,7 +77,7 @@ public class VlsmCalculator {
         return (int) Math.pow(2, Integer.SIZE - mask) - 2;
     }
 
-    public static String toDecMask(int mask) {
+    static String toDecMask(int mask) {
         if (mask == 0) {
             return "0.0.0.0";
         }

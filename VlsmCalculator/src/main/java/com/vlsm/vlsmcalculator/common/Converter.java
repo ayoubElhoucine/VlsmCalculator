@@ -1,7 +1,7 @@
 package com.vlsm.vlsmcalculator.common;
 
-public class Converter {
-    public static String convertIPIntDec2StringBinary(int intIP) {
+class Converter {
+    static String convertIPIntDec2StringBinary(int intIP) {
         String stringIP = Integer.toBinaryString(intIP);
         int length = stringIP.length();
         if (length < 32) {
@@ -16,7 +16,7 @@ public class Converter {
         return octet1 + "." + octet2 + "." + octet3 + "." + stringIP.substring(24, 32);
     }
 
-    public static String convertIPIntDec2StringHex(int intIP) {
+    static String convertIPIntDec2StringHex(int intIP) {
         String stringIP = Integer.toHexString(intIP);
         int length = stringIP.length();
         if (length < 8) {
@@ -31,7 +31,7 @@ public class Converter {
         return octet1 + "." + octet2 + "." + octet3 + "." + stringIP.substring(6, 8);
     }
 
-    public static int stringIPtoInt(String ip) throws Exception {
+    static int stringIPtoInt(String ip) throws Exception {
         String[] quad = ip.split("\\.", 4);
         if (quad.length != 4) {
             throw new Exception();
