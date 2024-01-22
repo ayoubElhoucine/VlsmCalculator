@@ -1,4 +1,4 @@
-package com.vlsm.vlsmcalculator.common;
+package com.vlsm.vlsmcalculator;
 
 class Converter {
     static String convertIPIntDec2StringBinary(int intIP) {

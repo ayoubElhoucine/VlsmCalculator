@@ -1,8 +1,8 @@
 package com.vlsm.vlsmcalculatorsample.playground
 
-import com.vlsm.vlsmcalculator.common.VlsmCalculator
+import com.vlsm.vlsmcalculator.Networking
 
 fun main() {
-    val vlsm = VlsmCalculator.calculateVLSM("192.198.10.16", hashMapOf("1" to 4, "2" to 6, "3" to 10))
+    val vlsm = Networking.getInstance().calculateVlsm("192.198.10.16", hashMapOf("1" to 4, "2" to 6, "3" to 10))
     println("result === $vlsm")
 }
