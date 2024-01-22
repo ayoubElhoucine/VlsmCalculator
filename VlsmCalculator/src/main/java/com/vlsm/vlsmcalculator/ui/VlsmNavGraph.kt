@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.vlsm.vlsmcalculator.ui.vlsmCalculator.VlsmCalculatorScreen
 
 
 object Screens {
@@ -12,8 +13,7 @@ object Screens {
 }
 
 @Composable
-fun AppNavGraph(
-    finishActivity: () -> Unit = {},
+fun VlsmNavGraph(
     appState: AppState,
     startDestination: String = Screens.VLSM_CALCULATOR,
 ) {
@@ -23,18 +23,11 @@ fun AppNavGraph(
         startDestination = startDestination,
     ) {
 
-//        composable(Screens.SPLASH) {
-//            BackHandler(onBack = finishActivity)
-//            SplashScreen(
-//                onLogin = {
-//                    appState.navigateTo(Screens.LOGIN)
-//                },
-//                onHome = {
-//                    appState.navigateTo(Screens.HOME)
-//                },
-//            )
-//        }
-//
+        composable(Screens.VLSM_CALCULATOR) {
+            BackHandler(onBack = appState::popBack)
+            VlsmCalculatorScreen()
+        }
+
 //        composable(Screens.LOGIN) {
 //            BackHandler(onBack = finishActivity)
 //            LoginScreen {
