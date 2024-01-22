@@ -1,4 +1,4 @@
-package com.vlsm.vlsmcalculator;
+package com.vlsm.vlsmcalculator.common;
 
 import com.vlsm.vlsmcalculator.model.Subnet;
 

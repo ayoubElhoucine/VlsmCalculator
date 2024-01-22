@@ -1,4 +1,4 @@
-package com.vlsm.vlsmcalculator;
+package com.vlsm.vlsmcalculator.common;
 
 import android.annotation.SuppressLint;
 
