@@ -47,7 +47,7 @@ class VlsmCalculator {
         return sortedMap;
     }
 
-    public static int convertQuartetToBinaryString(String ipAddress) {
+    static int convertQuartetToBinaryString(String ipAddress) {
         String[] ip = ipAddress.split("\\.|/");
         int octet1 = Integer.parseInt(ip[0]);
         int octet2 = Integer.parseInt(ip[1]);
