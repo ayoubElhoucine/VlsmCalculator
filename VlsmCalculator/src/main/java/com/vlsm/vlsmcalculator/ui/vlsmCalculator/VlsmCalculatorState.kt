@@ -23,8 +23,8 @@ internal fun rememberVlsmCalculatorState (
 @Stable
 internal class VlsmCalculatorState(
     val context: Context,
-    private val ipAddress: MutableState<String>,
-    private val hostNumbers: SnapshotStateList<Int>,
+    val ipAddress: MutableState<String>,
+    val hostNumbers: SnapshotStateList<Int>,
 ) {
 
     fun calculate() = Networking.getInstance().calculateVlsm(
