@@ -2,30 +2,34 @@ package com.vlsm.vlsmcalculator.ui.vlsmCalculator
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import com.vlsm.vlsmcalculator.common.Networking
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun rememberVlsmCalculatorState (
     context: Context = LocalContext.current,
-) = remember {
-    VlsmCalculatorState(context)
+    ipAddress: MutableState<String> = mutableStateOf(""),
+    hostNumbers: SnapshotStateList<Int> = mutableStateListOf(),
+) = remember(ipAddress, hostNumbers) {
+    VlsmCalculatorState(context, ipAddress, hostNumbers)
 }
 
 @Stable
 internal class VlsmCalculatorState(
     val context: Context,
+    private val ipAddress: MutableState<String>,
+    private val hostNumbers: SnapshotStateList<Int>,
 ) {
-
-    val ipAddress = MutableStateFlow("")
-    val hostNumbers = MutableStateFlow(arrayListOf<Int>())
 
     fun calculate() = Networking.getInstance().calculateVlsm(
         ipAddress.value,
-        HashMap(hostNumbers.value.associateBy({hostNumbers.value.indexOf(it).toString()}, {it}))
+        HashMap(hostNumbers.associateBy({hostNumbers.indexOf(it).toString()}, {it}))
     )
 
 }
