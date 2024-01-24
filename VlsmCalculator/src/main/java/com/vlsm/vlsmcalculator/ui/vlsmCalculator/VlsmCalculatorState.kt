@@ -15,7 +15,7 @@ import com.vlsm.vlsmcalculator.common.Networking
 internal fun rememberVlsmCalculatorState (
     context: Context = LocalContext.current,
     ipAddress: MutableState<String> = mutableStateOf(""),
-    hostNumbers: SnapshotStateList<Int> = mutableStateListOf(),
+    hostNumbers: SnapshotStateList<Int?> = mutableStateListOf(null, null, null),
 ) = remember(ipAddress, hostNumbers) {
     VlsmCalculatorState(context, ipAddress, hostNumbers)
 }
@@ -24,12 +24,12 @@ internal fun rememberVlsmCalculatorState (
 internal class VlsmCalculatorState(
     val context: Context,
     val ipAddress: MutableState<String>,
-    val hostNumbers: SnapshotStateList<Int>,
+    val hostNumbers: SnapshotStateList<Int?>,
 ) {
 
     fun calculate() = Networking.getInstance().calculateVlsm(
         ipAddress.value,
-        HashMap(hostNumbers.associateBy({hostNumbers.indexOf(it).toString()}, {it}))
+        HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
     )
 
 }
