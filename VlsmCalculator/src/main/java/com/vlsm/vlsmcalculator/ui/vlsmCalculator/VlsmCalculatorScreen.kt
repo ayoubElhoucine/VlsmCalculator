@@ -9,6 +9,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
@@ -24,37 +25,44 @@ internal fun VlsmCalculatorScreen(
     state: VlsmCalculatorState = rememberVlsmCalculatorState()
 ) {
     ScreenLayout {
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 36.dp),
-            value = state.ipAddress.value,
-            placeholder = {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = "IP address",
-                    textAlign = TextAlign.Center,
-                    fontSize = 16.sp,
-                )
-            },
-            maxLines = 1,
-            singleLine = true,
-            onValueChange = {
-                state.ipAddress.value = it
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Decimal,
-                imeAction = ImeAction.Done,
-                autoCorrect = false,
-            ),
-            shape = RoundedCornerShape(12.dp),
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-            ),
-            textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
-        )
+        IpAddressView(text = state.ipAddress)
     }
+}
+
+@Composable
+private fun IpAddressView(
+    text: MutableState<String>
+) {
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 36.dp),
+        value = text.value,
+        placeholder = {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "IP address",
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp,
+            )
+        },
+        maxLines = 1,
+        singleLine = true,
+        onValueChange = {
+            text.value = it
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Decimal,
+            imeAction = ImeAction.Done,
+            autoCorrect = false,
+        ),
+        shape = RoundedCornerShape(12.dp),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.White,
+            unfocusedContainerColor = Color.White,
+        ),
+        textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+    )
 }
 
 @Preview(showBackground = true)
