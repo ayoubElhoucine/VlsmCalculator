@@ -27,6 +27,13 @@ internal class VlsmCalculatorState(
     val hostNumbers: SnapshotStateList<Int?>,
 ) {
 
+    fun updateHostNumbers(text: String, index: Int) {
+        hostNumbers[index] = text.toIntOrNull()
+        hostNumbers.lastOrNull()?.let {
+            hostNumbers.add(null)
+        }
+    }
+
     fun calculate() = Networking.getInstance().calculateVlsm(
         ipAddress.value,
         HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
