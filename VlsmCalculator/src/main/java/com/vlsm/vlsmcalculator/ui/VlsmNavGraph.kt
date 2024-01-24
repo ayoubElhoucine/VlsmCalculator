@@ -7,16 +7,16 @@ import androidx.navigation.compose.composable
 import com.vlsm.vlsmcalculator.ui.vlsmCalculator.VlsmCalculatorScreen
 
 
-object Screens {
+internal object Screens {
     const val VLSM_CALCULATOR = "vlsm_calculator"
     const val VLSM_CALCULATOR_RESULT = "vlsm_calculator_result"
 }
 
 @Composable
 fun VlsmNavGraph(
-    appState: AppState,
     startDestination: String = Screens.VLSM_CALCULATOR,
 ) {
+    val appState = rememberAppState()
     val navController = appState.navController
     NavHost(
         navController = navController,

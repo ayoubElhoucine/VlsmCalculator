@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun rememberAppState(
+internal fun rememberAppState(
     context: Context = LocalContext.current,
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
@@ -20,7 +20,7 @@ fun rememberAppState(
 }
 
 @Stable
-class AppState(
+internal class AppState(
     val context: Context,
     val navController: NavHostController,
     val coroutineScope: CoroutineScope,
