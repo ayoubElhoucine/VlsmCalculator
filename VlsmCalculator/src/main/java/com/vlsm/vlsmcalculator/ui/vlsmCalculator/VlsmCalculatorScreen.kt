@@ -34,6 +34,7 @@ internal fun VlsmCalculatorScreen(
     ScreenLayout {
         IpAddressView(text = state.ipAddress)
         HostNumbersView(data = state.hostNumbers, onValueChanged = state::updateHostNumbers)
+
     }
 }
 

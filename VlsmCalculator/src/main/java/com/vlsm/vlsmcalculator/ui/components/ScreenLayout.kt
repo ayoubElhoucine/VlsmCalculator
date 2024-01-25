@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ScreenLayout (
+internal fun ScreenLayout (
     title: String? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
