@@ -27,6 +27,8 @@ internal class VlsmCalculatorState(
     val hostNumbers: SnapshotStateList<Int?>,
 ) {
 
+    val enabled: Boolean get() = ipAddress.value.isNotBlank() && hostNumbers.filterNotNull().isNotEmpty()
+
     fun updateHostNumbers(text: String, index: Int) {
         hostNumbers[index] = text.toIntOrNull()
         hostNumbers.lastOrNull()?.let {
