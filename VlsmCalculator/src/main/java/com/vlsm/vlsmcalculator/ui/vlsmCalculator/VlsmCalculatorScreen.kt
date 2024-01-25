@@ -2,21 +2,25 @@ package com.vlsm.vlsmcalculator.ui.vlsmCalculator
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
@@ -90,7 +94,7 @@ private fun HostNumbersView(
         columns = GridCells.Fixed(3),
     ) {
         itemsIndexed(data) { index, value ->
-            OutlinedTextField(
+            BasicTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .border(
@@ -98,17 +102,8 @@ private fun HostNumbersView(
                         color = Color.Black,
                         shape = RoundedCornerShape(10.dp),
                     )
-                    .height(46.dp),
+                    .height(42.dp),
                 value = value?.toString() ?: "",
-                placeholder = {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = "Host number $index",
-                        textAlign = TextAlign.Center,
-                        fontSize = 10.sp,
-                        maxLines = 1,
-                    )
-                },
                 singleLine = true,
                 onValueChange = {
                     onValueChanged(it, index)
@@ -118,14 +113,22 @@ private fun HostNumbersView(
                     imeAction = ImeAction.Done,
                     autoCorrect = false,
                 ),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White,
-                    focusedBorderColor = Color.Unspecified,
-                    unfocusedBorderColor = Color.Unspecified,
-                ),
                 textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center, fontSize = 14.sp),
-            )
+            ) { innerTextField ->
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    value ?: run {
+                        Text(
+                            text = "Host number $index",
+                            color = Color.Black.copy(alpha = 0.6f),
+                            fontSize = 11.sp
+                        )
+                    }
+                    innerTextField()
+                }
+            }
         }
     }
 }
