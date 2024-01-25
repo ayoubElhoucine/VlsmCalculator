@@ -1,12 +1,15 @@
 package com.vlsm.vlsmcalculator.ui.vlsmCalculator
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
@@ -15,6 +18,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -37,8 +41,15 @@ internal fun VlsmCalculatorScreen(
     state: VlsmCalculatorState = rememberVlsmCalculatorState()
 ) {
     ScreenLayout {
-        IpAddressView(text = state.ipAddress)
-        HostNumbersView(data = state.hostNumbers, onValueChanged = state::updateHostNumbers)
+        Column(
+            modifier = Modifier
+                .background(Color.Black.copy(0.05f), shape = RoundedCornerShape(10.dp))
+                .padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            IpAddressView(text = state.ipAddress)
+            HostNumbersView(data = state.hostNumbers, onValueChanged = state::updateHostNumbers)
+        }
         MyButton(
             onClick = state::calculate,
             enabled = state.enabled,
@@ -75,9 +86,11 @@ private fun IpAddressView(
             autoCorrect = false,
         ),
         shape = RoundedCornerShape(10.dp),
-        colors = TextFieldDefaults.colors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
+            focusedBorderColor = Color.Black.copy(0.2f),
+            unfocusedBorderColor = Color.Black.copy(0.2f),
         ),
         textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
     )
@@ -89,17 +102,18 @@ private fun HostNumbersView(
     onValueChanged: (String, Int) -> Unit,
 ) {
     LazyVerticalGrid(
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
         columns = GridCells.Fixed(3),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         itemsIndexed(data) { index, value ->
             BasicTextField(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(Color.White, shape = RoundedCornerShape(10.dp))
                     .border(
-                        width = 0.5.dp,
-                        color = Color.Black,
+                        width = 1.dp,
+                        color = Color.Black.copy(0.2f),
                         shape = RoundedCornerShape(10.dp),
                     )
                     .height(42.dp),
