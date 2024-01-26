@@ -10,7 +10,7 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-class InetAddresses {
+class MyInetAddresses {
     private static final int IPV4_PART_COUNT = 4;
     private static final int IPV6_PART_COUNT = 8;
 
