@@ -11,24 +11,36 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import com.vlsm.vlsmcalculator.common.Networking
 import com.vlsm.vlsmcalculator.common.isValidIpAddress
+import com.vlsm.vlsmcalculator.model.Subnet
+import com.vlsm.vlsmcalculator.ui.common.UiState
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 @Composable
 internal fun rememberVlsmCalculatorState (
     context: Context = LocalContext.current,
+    uiState: MutableState<UiState> = mutableStateOf(UiState.Idle),
     ipAddress: MutableState<String> = mutableStateOf(""),
     hostNumbers: SnapshotStateList<Int?> = mutableStateListOf(null, null, null),
 ) = remember(ipAddress, hostNumbers) {
-    VlsmCalculatorState(context, ipAddress, hostNumbers)
+    VlsmCalculatorState(context, uiState, ipAddress, hostNumbers)
 }
 
 @Stable
 internal class VlsmCalculatorState(
     val context: Context,
+    val uiState: MutableState<UiState>,
     val ipAddress: MutableState<String>,
     val hostNumbers: SnapshotStateList<Int?>,
 ) {
 
-    val enabled: Boolean get() = ipAddress.value.isValidIpAddress() && hostNumbers.filterNotNull().isNotEmpty()
+    val enabled: Boolean get() =
+        ipAddress.value.isValidIpAddress() &&
+                hostNumbers.filterNotNull().isNotEmpty() &&
+                uiState.value != UiState.Loading
 
     fun updateHostNumbers(text: String, index: Int) {
         hostNumbers[index] = text.toIntOrNull()
@@ -37,9 +49,17 @@ internal class VlsmCalculatorState(
         }
     }
 
-    fun calculate() = Networking.getInstance().calculateVlsm(
-        ipAddress.value,
-        HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
-    )
+    suspend fun calculate(onComplete: (List<Subnet>) -> Unit) = suspendCoroutine { continuation ->
+        runBlocking {
+            uiState.value = UiState.Loading
+            val result = Networking.getInstance().calculateVlsm(
+                ipAddress.value,
+                HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
+            )
+            delay(1000)
+            continuation.resume(result)
+            uiState.value = UiState.Idle
+        }
+    }
 
 }

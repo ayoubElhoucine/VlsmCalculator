@@ -22,7 +22,9 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,12 +38,14 @@ import androidx.compose.ui.unit.sp
 import com.vlsm.vlsmcalculator.model.Subnet
 import com.vlsm.vlsmcalculator.ui.components.MyButton
 import com.vlsm.vlsmcalculator.ui.components.ScreenLayout
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun VlsmCalculatorScreen(
     state: VlsmCalculatorState = rememberVlsmCalculatorState(),
     onDetails: (List<Subnet>) -> Unit,
 ) {
+    val scope = rememberCoroutineScope()
     ScreenLayout {
         Column(
             modifier = Modifier
@@ -54,7 +58,11 @@ internal fun VlsmCalculatorScreen(
         }
         MyButton(
             enabled = state.enabled,
-            onClick = state::calculate,
+            onClick = {
+                scope.launch {
+                    state.calculate(onDetails)
+                }
+            },
         ) {
             Text(text = "Calculate")
         }
