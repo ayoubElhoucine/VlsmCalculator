@@ -49,17 +49,14 @@ internal class VlsmCalculatorState(
         }
     }
 
-    suspend fun calculate(onComplete: (List<Subnet>) -> Unit) = suspendCoroutine { continuation ->
-        runBlocking {
-            uiState.value = UiState.Loading
-            val result = Networking.getInstance().calculateVlsm(
-                ipAddress.value,
-                HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
-            )
-            delay(10000)
-            continuation.resume(result)
-            uiState.value = UiState.Idle
-        }
+    suspend fun calculate(): (List<Subnet>) = suspendCoroutine { continuation ->
+        uiState.value = UiState.Loading
+        val result = Networking.getInstance().calculateVlsm(
+            ipAddress.value,
+            HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
+        )
+        continuation.resume(result)
+        uiState.value = UiState.Idle
     }
 
 }
