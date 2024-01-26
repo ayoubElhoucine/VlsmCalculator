@@ -135,7 +135,7 @@ private fun HostNumbersView(
                 ) {
                     value ?: run {
                         Text(
-                            text = "Host number $index",
+                            text = "Host number ${index + 1}",
                             color = Color.Black.copy(alpha = 0.6f),
                             fontSize = 11.sp
                         )
