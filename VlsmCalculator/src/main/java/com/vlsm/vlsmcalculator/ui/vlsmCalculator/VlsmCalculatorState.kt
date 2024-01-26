@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
 import com.vlsm.vlsmcalculator.common.Networking
+import com.vlsm.vlsmcalculator.common.isValidIpAddress
 
 @Composable
 internal fun rememberVlsmCalculatorState (
@@ -27,7 +28,7 @@ internal class VlsmCalculatorState(
     val hostNumbers: SnapshotStateList<Int?>,
 ) {
 
-    val enabled: Boolean get() = ipAddress.value.isNotBlank() && hostNumbers.filterNotNull().isNotEmpty()
+    val enabled: Boolean get() = ipAddress.value.isValidIpAddress() && hostNumbers.filterNotNull().isNotEmpty()
 
     fun updateHostNumbers(text: String, index: Int) {
         hostNumbers[index] = text.toIntOrNull()
