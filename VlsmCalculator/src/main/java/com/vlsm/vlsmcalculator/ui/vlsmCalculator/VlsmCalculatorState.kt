@@ -56,7 +56,7 @@ internal class VlsmCalculatorState(
                 ipAddress.value,
                 HashMap(hostNumbers.filterNotNull().associateBy({hostNumbers.indexOf(it).toString()}, {it}))
             )
-            delay(1000)
+            delay(10000)
             continuation.resume(result)
             uiState.value = UiState.Idle
         }

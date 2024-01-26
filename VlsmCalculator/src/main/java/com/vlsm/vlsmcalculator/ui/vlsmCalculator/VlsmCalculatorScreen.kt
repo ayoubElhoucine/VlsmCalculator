@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -36,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vlsm.vlsmcalculator.model.Subnet
+import com.vlsm.vlsmcalculator.ui.common.UiState
 import com.vlsm.vlsmcalculator.ui.components.MyButton
 import com.vlsm.vlsmcalculator.ui.components.ScreenLayout
 import kotlinx.coroutines.launch
@@ -64,7 +67,14 @@ internal fun VlsmCalculatorScreen(
                 }
             },
         ) {
-            Text(text = "Calculate")
+            when (state.uiState.value) {
+                UiState.Loading -> CircularProgressIndicator(
+                    modifier = Modifier.size(30.dp),
+                    color = Color.White,
+                    strokeWidth = 1.5.dp,
+                )
+                else -> Text(text = "Calculate")
+            }
         }
     }
 }
