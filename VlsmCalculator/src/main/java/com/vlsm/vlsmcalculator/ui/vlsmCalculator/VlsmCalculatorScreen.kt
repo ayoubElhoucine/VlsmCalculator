@@ -33,12 +33,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vlsm.vlsmcalculator.model.Subnet
 import com.vlsm.vlsmcalculator.ui.components.MyButton
 import com.vlsm.vlsmcalculator.ui.components.ScreenLayout
 
 @Composable
 internal fun VlsmCalculatorScreen(
-    state: VlsmCalculatorState = rememberVlsmCalculatorState()
+    state: VlsmCalculatorState = rememberVlsmCalculatorState(),
+    onDetails: (List<Subnet>) -> Unit,
 ) {
     ScreenLayout {
         Column(
@@ -51,8 +53,8 @@ internal fun VlsmCalculatorScreen(
             HostNumbersView(data = state.hostNumbers, onValueChanged = state::updateHostNumbers)
         }
         MyButton(
-            onClick = state::calculate,
             enabled = state.enabled,
+            onClick = state::calculate,
         ) {
             Text(text = "Calculate")
         }
@@ -150,5 +152,7 @@ private fun HostNumbersView(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    VlsmCalculatorScreen()
+    VlsmCalculatorScreen {
+
+    }
 }

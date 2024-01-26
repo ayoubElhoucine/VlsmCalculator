@@ -25,7 +25,9 @@ fun VlsmNavGraph(
 
         composable(Screens.VLSM_CALCULATOR) {
             BackHandler(onBack = appState::popBack)
-            VlsmCalculatorScreen()
+            VlsmCalculatorScreen {
+
+            }
         }
 
 //        composable(Screens.LOGIN) {
