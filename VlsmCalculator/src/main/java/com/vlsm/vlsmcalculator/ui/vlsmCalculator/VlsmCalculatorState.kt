@@ -13,9 +13,6 @@ import com.vlsm.vlsmcalculator.common.Networking
 import com.vlsm.vlsmcalculator.common.isValidIpAddress
 import com.vlsm.vlsmcalculator.model.Subnet
 import com.vlsm.vlsmcalculator.ui.common.UiState
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
