@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.vlsm.vlsmcalculator.model.Subnet
 
 @Composable
-internal fun VlsmResultScrenn(
+internal fun VlsmResultScreen(
     result: List<Subnet>,
     onBack: () -> Unit,
 ) {

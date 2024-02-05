@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.vlsm.vlsmcalculator.model.Subnet
 import com.vlsm.vlsmcalculator.ui.vlsmCalculator.VlsmCalculatorScreen
-import com.vlsm.vlsmcalculator.ui.vlsmCalculator.VlsmResultScrenn
+import com.vlsm.vlsmcalculator.ui.vlsmCalculator.VlsmResultScreen
 
 
 internal object Screens {
@@ -36,7 +36,7 @@ fun VlsmNavGraph(
         composable(Screens.VLSM_CALCULATOR_RESULT) {
             BackHandler(onBack = appState::popBack)
             appState.navController.previousBackStackEntry?.savedStateHandle?.get<List<Subnet>>("result")?.let { result ->
-                VlsmResultScrenn(result = result, onBack = appState::popBack)
+                VlsmResultScreen(result = result, onBack = appState::popBack)
             }
         }
 
