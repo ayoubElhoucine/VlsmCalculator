@@ -61,7 +61,7 @@ internal fun VlsmCalculatorScreen(
             onClick = {
                 scope.launch {
                     val result = state.calculate()
-                    println(result)
+                    onDetails(result)
                 }
             },
         ) {
