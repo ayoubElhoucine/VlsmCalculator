@@ -164,11 +164,3 @@ private fun HostNumbersView(
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    VlsmCalculatorScreen {
-
-    }
-}
