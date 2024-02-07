@@ -15,7 +15,7 @@ internal object Screens {
 }
 
 @Composable
-fun VlsmNavGraph(
+fun VlsmCalculatorView(
     startDestination: String = Screens.VLSM_CALCULATOR,
 ) {
     val appState = rememberAppState()
