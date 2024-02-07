@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,7 +27,9 @@ internal fun VlsmResultScreen(
     result: List<Subnet>,
     onBack: () -> Unit,
 ) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().background(Color.White)
+    ) {
         item { Spacer(modifier = Modifier.height(16.dp)) }
         itemsIndexed(result) { _, item ->
             SubnetViewItem(subnet = item)
