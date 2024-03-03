@@ -1,1 +1,1 @@
-Vlsm & CIDER Calculator lib
+Vlsm & CIDER Calculator library
