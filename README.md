@@ -26,6 +26,7 @@ Networking.getInstance().calculateVlsm(
 ```
 **you will get the result as list of Subnet object**
 
+
 2. Or you Use a predefined UI of VLSM calculator: (it is a jetpack compose view)
 ```kotlin
 VlsmCalculatorView()
