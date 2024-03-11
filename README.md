@@ -1,6 +1,6 @@
 # Vlsm & CIDER Calculator
 
-![](demo_two.gif)
+![](demo.gif)
 
 
 ## Requirements
