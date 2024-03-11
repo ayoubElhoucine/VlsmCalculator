@@ -19,9 +19,12 @@ implementation("com.ayoubelhoucine:vlsmcalculator:1.0.0-alpha")
 ## Usage
 1. Calculate VLSM: provide IP address with host numbers, ex:
 ```kotlin
-Networking.getInstance().calculateVlsm("192.198.10.16", hashMapOf("Host number 1" to 4, "Host number 2" to 6, "Host number 3" to 10))
+Networking.getInstance().calculateVlsm(
+    "192.198.10.16", 
+    hashMapOf("Host number 1" to 4, "Host number 2" to 6, "Host number 3" to 10)
+)
 ```
-you will get the result as list of Subnet object
+**you will get the result as list of Subnet object**
 
 2. Or you Use a predefined UI of VLSM calculator: (it is a jetpack compose view)
 ```kotlin
