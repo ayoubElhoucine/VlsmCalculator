@@ -7,7 +7,7 @@
 
 **Vlsm & CIDER Calculator** is an Android library.
 
-* min SDK is 24
+* min SDK is 24.
 
 
 ## Installation
