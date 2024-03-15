@@ -26,11 +26,17 @@ Networking.getInstance().calculateVlsm(
 ```
 **you will get the result as list of Subnet object**
 
-
 2. Or you Use a predefined UI of VLSM calculator: (it is a jetpack compose view)
 ```kotlin
 VlsmCalculatorView()
 ```
+**In case you need the result from the predefined UI then you can call the ```onResult(List<Subnet>) ``` from the view:**
+```kotlin
+VlsmCalculatorView { resutl ->
+    // make your own login with the result
+}
+```
+
 
 
 ## Contributions
