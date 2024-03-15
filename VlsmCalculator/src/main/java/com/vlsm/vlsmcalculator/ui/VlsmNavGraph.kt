@@ -16,13 +16,13 @@ internal object Screens {
 
 @Composable
 fun VlsmCalculatorView(
-    startDestination: String = Screens.VLSM_CALCULATOR,
+    onResult: ((List<Subnet>) -> Unit)? = null,
 ) {
     val appState = rememberAppState()
     val navController = appState.navController
     NavHost(
         navController = navController,
-        startDestination = startDestination,
+        startDestination = Screens.VLSM_CALCULATOR,
     ) {
 
         composable(Screens.VLSM_CALCULATOR) {
@@ -36,6 +36,7 @@ fun VlsmCalculatorView(
         composable(Screens.VLSM_CALCULATOR_RESULT) {
             BackHandler(onBack = appState::popBack)
             appState.navController.previousBackStackEntry?.savedStateHandle?.get<List<Subnet>>("result")?.let { result ->
+                onResult?.invoke(result)
                 VlsmResultScreen(result = result, onBack = appState::popBack)
             }
         }
